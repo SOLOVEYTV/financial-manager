@@ -1,4 +1,4 @@
-package transacation_usecase
+package transaction_usecase
 
 import (
 	"github.com/SOLOVEYTV/financial-manager/internal/adapter/storage/in_memory_storage/transaction_in_memory_repo"
