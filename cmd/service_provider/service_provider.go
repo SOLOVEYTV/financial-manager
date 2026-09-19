@@ -3,13 +3,13 @@ package service_provider
 import (
 	"github.com/SOLOVEYTV/financial-manager/internal/adapter/storage/in_memory_storage/transaction_in_memory_repo"
 	"github.com/SOLOVEYTV/financial-manager/internal/app/http/http_handlers/transaction_http_handler"
-	"github.com/SOLOVEYTV/financial-manager/internal/service/usecases/transacation_usecase"
+	"github.com/SOLOVEYTV/financial-manager/internal/service/usecases/transaction_usecase"
 )
 
 type ServiceProvider struct {
 	transactionInMemoryRepo *transaction_in_memory_repo.Repo
 
-	transactionUseCase *transacation_usecase.UseCase
+	transactionUseCase *transaction_usecase.UseCase
 
 	transactionHTTPHandler *transaction_http_handler.Handler
 }
@@ -26,9 +26,9 @@ func (s *ServiceProvider) getTransactionInMemoryRepo() *transaction_in_memory_re
 	return s.transactionInMemoryRepo
 }
 
-func (s *ServiceProvider) getTransactionUseCase() *transacation_usecase.UseCase {
+func (s *ServiceProvider) getTransactionUseCase() *transaction_usecase.UseCase {
 	if s.transactionUseCase == nil {
-		s.transactionUseCase = transacation_usecase.NewUseCase(
+		s.transactionUseCase = transaction_usecase.NewUseCase(
 			s.getTransactionInMemoryRepo(),
 		)
 	}

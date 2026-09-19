@@ -2,6 +2,7 @@ package transaction_in_memory_repo
 
 import (
 	"context"
+	"time"
 
 	"github.com/SOLOVEYTV/financial-manager/internal/domain"
 	"github.com/SOLOVEYTV/financial-manager/internal/domain/model"
@@ -28,6 +29,18 @@ func (r *Repo) GetTransactionByID(_ context.Context, transactionID string) (*mod
 	if !ok {
 		return nil, domain.ErrTransactionNotFound
 	}
+
+	return transaction, nil
+}
+
+func (r *Repo) DeleteTransactionByID(_ context.Context, transactionID string) (*model.Transaction, error) {
+	transaction, ok := r.storage[transactionID]
+	if !ok {
+		return nil, domain.ErrTransactionNotFound
+	}
+	now := time.Now().UTC()
+	transaction.DeletedAt = &now
+	transaction.UpdatedAt = now
 
 	return transaction, nil
 }
